@@ -9,6 +9,7 @@ import java.util.stream.IntStream;
 public class AgeSorterApp {
 
 	public static void main(String[] args) throws IOException {
+		//for test
 		FileOutputStream outputStream = new FileOutputStream("testFile");
 		int[] test = { 15, 24, 3, 45, 15, 45, 15 };
 		for (int i = 0; i < test.length; i++) {
