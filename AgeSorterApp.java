@@ -20,7 +20,7 @@ public class AgeSorterApp {
 
 	}
 	
-	public static void ageSorter(String pathNameIn, String pathNameOut) {
+		public static void ageSorter(String pathNameIn, String pathNameOut) {
 		int[] age = new int[127]; // array for age. size = 127. think it's enough
 		int[] qty = new int[127]; // array for quantity (qty) of people same age
 
@@ -28,14 +28,13 @@ public class AgeSorterApp {
 				DataOutputStream brOut = new DataOutputStream(new FileOutputStream(new File(pathNameOut)))) {
 
 			// read data from file and sent to stream
-			IntStream.generate(() -> {
-				try {
-					return br.read();
-				} catch (IOException e) {
-					return 0;
-				}
-			}).limit(br.available())
-					// sorting data to arrays of age and qty
+			byte[]tempArr = new byte [Integer.MAX_VALUE - 8];
+			int test = 0;
+			while ((test=br.read(tempArr))!=-1) {
+				IntStream.range(0, tempArr.length)
+		        .map(i -> tempArr[i] & 0xFF).limit(tempArr.length)
+
+		        // sorting data to arrays of age and qty
 					.forEach(n -> {
 						for (int i = 0; i < age.length; i++) {
 							if (age[i] == n) {
@@ -50,7 +49,8 @@ public class AgeSorterApp {
 							}
 						}
 					});
-			// uniting data from two arrays and and writing it to file
+			}
+			// uniting data from two arrays and and writing it to  file
 			for (int i = 0; i < age.length; i++) {
 				if (age[i] != 0) {
 					System.out.println("age :" + age[i] + " qty: " + qty[i]);
