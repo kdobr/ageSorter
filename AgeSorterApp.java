@@ -28,7 +28,7 @@ public class AgeSorterApp {
 				DataOutputStream brOut = new DataOutputStream(new FileOutputStream(new File(pathNameOut)))) {
 
 			// read data from file and sent to stream
-			byte[]tempArr = new byte [Integer.MAX_VALUE - 8];
+			byte[]tempArr = new byte [1000000];
 			int test = 0;
 			while ((test=br.read(tempArr))!=-1) {
 				IntStream.range(0, tempArr.length)
